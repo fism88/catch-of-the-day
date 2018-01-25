@@ -8,13 +8,16 @@ class AddFishForm extends React.Component {
       price: this.price.value,
       status: this.status.value,
       desc: this.desc.value,
-      image: this.image_url.value
+      image: this.image.value
     }
+
+    this.props.addFish(fish);
+    this.fishForm.reset();
   }
 
   render () {
     return (
-      <form className="fish-edit" onSubmit={this.createFish.bind(this)}>
+      <form ref={(input) => this.fishForm = input } className="fish-edit" onSubmit={this.createFish.bind(this)}>
         <input ref={(input) => this.name} type="text" placeholder="Fish Name" />
         <input ref={(input) => this.price} type="text" placeholder="Fish Price" />
         <select ref={(input) => this.status}>
@@ -22,7 +25,7 @@ class AddFishForm extends React.Component {
           <option value="unavailable">Sold Out!</option>
         </select>
         <textarea ref={(input) => this.desc} placeholder="Fish Desc"></textarea>
-        <input ref={(input) => this.image_url} type="text" placeholder="Fish Image" />
+        <input ref={(input) => this.image} type="text" placeholder="Fish Image" />
         <button type="submit">+ Add Item</button>
       </form>
     )
